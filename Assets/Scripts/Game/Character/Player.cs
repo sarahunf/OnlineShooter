@@ -3,9 +3,10 @@ using Photon.Pun;
 
 namespace Game.Character
 {
-    public class Player : MonoBehaviour, ICharacter
+    public class Player : MonoBehaviour, ICharacter, IHealth
     {
         [SerializeField] private float speed;
+        [SerializeField] private byte health;
         [SerializeField] private Animator anim;
         private readonly int isRunning = Animator.StringToHash("isRunning");
         private PhotonView view;
@@ -13,6 +14,12 @@ namespace Game.Character
         {
             get => speed;
             set => speed = value;
+        }
+        
+        public byte Health
+        {
+            get => health;
+            set => health = value;
         }
         
         private void Start()
@@ -39,6 +46,18 @@ namespace Game.Character
         {
             throw new System.NotImplementedException();
         }
+        
 
+        public bool TakeDamage()
+        {
+            if (health <= 0) return false;
+                health--;
+            return health <= 0;
+        }
+
+        public void DoDamage()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

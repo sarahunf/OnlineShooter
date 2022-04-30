@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &2536239977936922595
+--- !u!114 &677574421
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,6 +8,23 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3288544089296302112}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e7bcc624dd4a858b2e3e573490dc69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &2536239977936922595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3288544089296302112}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2aa6528b21484ca896870db294f016b1, type: 3}
   m_Name: 
@@ -24,9 +41,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1545292121087937253, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1979287525107795240, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
       propertyPath: sceneViewId
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932207297406394305, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932207297406394305, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932207297406394305, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].Name
+      value: isAttacking
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932207297406394305, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].Type
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8051613924144973540, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
       propertyPath: m_RootOrder
@@ -34,11 +71,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8051613924144973540, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 219.8756
+      value: 26.6
       objectReference: {fileID: 0}
     - target: {fileID: 8051613924144973540, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 144.47687
+      value: -14.6
       objectReference: {fileID: 0}
     - target: {fileID: 8051613924144973540, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -72,10 +109,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8314395813877395522, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a5ad45affbef9f6439b9c2631f9dcc90, type: 2}
     - target: {fileID: 8357747633957928073, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 7ea3aa7cb05862a4aa660403f0a7c740, type: 3}
+    - target: {fileID: 8619482953026495608, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
 --- !u!1 &3288544089296302112 stripped
