@@ -14,6 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   anim: {fileID: 5307279699489865899}
+--- !u!70 &7439236737680891703
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3437494236503374348}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2.56}
+  m_Size: {x: 2.56, y: 5.12}
+  m_Direction: 0
 --- !u!1001 &4234953978012791017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25,9 +41,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1545292121087937253, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1979287525107795240, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
       propertyPath: sceneViewId
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932207297406394305, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932207297406394305, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].Name
+      value: isAttacking
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932207297406394305, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].Type
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8051613924144973540, guid: fb23295e9c1163e43b03743a52af02a4, type: 3}
       propertyPath: m_RootOrder

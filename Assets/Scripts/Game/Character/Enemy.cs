@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace Game.Character
 {
-    public class Enemy : MonoBehaviour, ICharacter
+    public class Enemy : MonoBehaviour, ICharacter, IHealth
     {
         [SerializeField] private float speed;
+        [SerializeField] private byte health;
         private Dictionary<Player, Transform> playersDict = new Dictionary<Player, Transform>();
         private Player nearestPlayer;
 
@@ -14,6 +15,12 @@ namespace Game.Character
         {
             get => speed;
             set => speed = value;
+        }
+        
+        public byte Health
+        {
+            get => health;
+            set => health = value;
         }
 
         private void Start()
@@ -49,5 +56,14 @@ namespace Game.Character
             throw new System.NotImplementedException();
         }
 
+        public bool TakeDamage()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DoDamage()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
