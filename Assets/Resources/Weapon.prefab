@@ -133,7 +133,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5797300071136229879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee75d3173a244312ab75b7bae76e3fd3, type: 3}
+  m_Script: {fileID: 11500000, guid: 4abc8d8cb6af4900ac72bd1c2cb69268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTimeBtwSpawns: 0.5
+  _weaponData: {fileID: 11400000, guid: 81781280a6233cf41b55d241771975dc, type: 2}
+  firePoint: {fileID: 2293568984475405689}
+  bulletPrefab: {fileID: 6037731426410255576, guid: bbe3906aabd1f8b4ca7b45ca45d7fa19, type: 3}

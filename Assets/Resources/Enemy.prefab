@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa6528b21484ca896870db294f016b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterData: {fileID: 11400000, guid: abfc9277fff6acf43bde8432861f14ee, type: 2}
   speed: 8
   health: 1
 --- !u!1001 &4094541254776289989

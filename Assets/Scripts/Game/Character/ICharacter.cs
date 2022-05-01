@@ -10,7 +10,7 @@ namespace Game.Character
             set;
         }
         void Update();
-        void Shoot();
+
         void Move(Vector2 translation);
     }
 }
