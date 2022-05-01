@@ -63,6 +63,11 @@ namespace Photon.Scripts.Managers
         {
             return PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == CurrentGameStatics.PLAYER_COUNT;
         }
+
+        public int PlayersInRoom()
+        {
+            return PhotonNetwork.CurrentRoom.Players.Count;
+        }
     }
     
 }

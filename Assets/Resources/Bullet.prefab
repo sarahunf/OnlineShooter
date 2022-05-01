@@ -175,5 +175,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bece7330d62c4d0e9d9578d4e9a5bdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
+  ammunitionData: {fileID: 11400000, guid: 9de4dc40735bb8846a0e704644ad402a, type: 2}
   rigidbody2D: {fileID: 6529514707472396148}
+  spriteRenderer: {fileID: 5557094723741522650}
+  speed: 0
+  speedMultiplier: 0
+  damage: 0
+  destroyTime: 0
+  sizeMultiplier: 0

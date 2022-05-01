@@ -1,40 +1,45 @@
 ﻿using Photon.Pun;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Game.Character.Weapon
 {
     public class Weapon : MonoBehaviour
     {
+        [SerializeField] private WeaponData _weaponData;
         [SerializeField] private Transform firePoint;
         [SerializeField] private GameObject bulletPrefab;
-        [SerializeField] private Transform centerTransform;
         private PhotonView _view;
-        private const byte BulletMax = 100;
+        private byte _bulletMax;
         private byte _bulletCount;
         private const string RPC_ShootMethod = "RPC_Shoot";
         private void Start()
         {
             _view = GetComponent<PhotonView>();
+            GetData();
+            SetData();
         }
+
         private void Update()
         {
-            Vector3 mouseScreenPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 lookAt = mouseScreenPosition;
-            float AngleRad = Mathf.Atan2(lookAt.y - this.transform.position.y, lookAt.x - this.transform.position.x);
-            float AngleDeg = (180 / Mathf.PI) * AngleRad;
-            Debug.Log(AngleDeg);
-            if (transform.rotation.z != AngleDeg)
-            {
-                transform.RotateAround(centerTransform.position, Vector3.forward, AngleDeg * Time.deltaTime);
-            }
-            
             if (!_view.IsMine) return;
-            if (Input.GetButtonDown("Fire1") && _bulletCount < BulletMax)
+            if (Input.GetButtonDown("Fire1") && _bulletCount < _bulletMax)
             {
                 Shoot();
             }
         }
         
+        private void GetData()
+        {
+            _bulletMax = _weaponData.maxAmmunition;
+        }
+
+        private void SetData()
+        {
+            Ammunition ammun = bulletPrefab.GetComponent<Ammunition>();
+            ammun.ammunitionData = _weaponData.AmmunitionData;
+        }
+
         protected virtual void Shoot()
         {
             _bulletCount++;
@@ -42,7 +47,7 @@ namespace Game.Character.Weapon
         }
 
         [PunRPC]
-        public void RPC_Shoot() //reference: RPC_ShootMethod
+        private void RPC_Shoot() //reference: RPC_ShootMethod
         {
             Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = worldMousePos - (Vector2)transform.position;

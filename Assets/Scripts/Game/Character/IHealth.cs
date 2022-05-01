@@ -7,7 +7,7 @@
             get;
             set;
         }
-        void TakeDamage();
+        void TakeDamage(byte amount);
 
         bool IsDead();
     }

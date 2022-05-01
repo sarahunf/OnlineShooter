@@ -11,6 +11,7 @@ namespace Game.Spawner
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] protected float startTimeBtwSpawns;
         private int _maxEnemies;
+        private readonly int _maxEnemiesMultiplier = ConnectPhotonManager.ME.PlayersInRoom();
         private static int _enemyCount;
         private float _timeBtwSpawns;
         private int _randomIndex;
@@ -28,7 +29,7 @@ namespace Game.Spawner
         {
         _randomIndex = Random.Range(0, spawnPoints.Length);
         _timeBtwSpawns = startTimeBtwSpawns;
-        _maxEnemies = spawnPoints.Length;
+        _maxEnemies = spawnPoints.Length * _maxEnemiesMultiplier;
         ObjToSpawn.GetComponent<EnemyBT>().waypoints =
             spawnPoints[_randomIndex].GetComponent<SpawnerWayPoints>().waypoints;
         }
