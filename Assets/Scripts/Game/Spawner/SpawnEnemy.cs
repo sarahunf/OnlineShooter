@@ -1,4 +1,5 @@
-﻿using Photon.Scripts.Managers;
+﻿using Game.Character.EnemyAI;
+using Photon.Scripts.Managers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,7 +10,10 @@ namespace Game.Spawner
         [SerializeField] private GameObject enemy;
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] protected float startTimeBtwSpawns;
-        private float timeBtwSpawns;
+        private int _maxEnemies;
+        private static int _enemyCount;
+        private float _timeBtwSpawns;
+        private int _randomIndex;
 
         protected override GameObject ObjToSpawn
         {
@@ -17,26 +21,47 @@ namespace Game.Spawner
             set => enemy = value;
         }
 
-        protected override Vector2 randomPosition => spawnPoints[Random.Range(0, spawnPoints.Length)].position;
+
+        protected override Vector2 randomPosition => spawnPoints[_randomIndex].position;
 
         private void Start()
         {
-            timeBtwSpawns = startTimeBtwSpawns;
+        _randomIndex = Random.Range(0, spawnPoints.Length);
+        _timeBtwSpawns = startTimeBtwSpawns;
+        _maxEnemies = spawnPoints.Length;
+        ObjToSpawn.GetComponent<EnemyBT>().waypoints =
+            spawnPoints[_randomIndex].GetComponent<SpawnerWayPoints>().waypoints;
         }
 
         private void Update()
         {
             if (!ConnectPhotonManager.ME.AllPlayerJoined()) return;
-
-            if (timeBtwSpawns <= 0)
+            if (ReachedMaxEnemies()) return;
+            
+            if (_timeBtwSpawns <= 0)
             {
+                _randomIndex = Random.Range(0, spawnPoints.Length);
+                ObjToSpawn.GetComponent<EnemyBT>().waypoints =
+                    spawnPoints[_randomIndex].GetComponent<SpawnerWayPoints>().waypoints;
                 Spawn();
-                timeBtwSpawns = startTimeBtwSpawns;
+                _timeBtwSpawns = startTimeBtwSpawns;
+                _enemyCount++;
             }
             else
             {
-                timeBtwSpawns -= Time.deltaTime;
+                _timeBtwSpawns -= Time.deltaTime;
             }
         }
+
+        private bool ReachedMaxEnemies()
+        {
+            return _enemyCount >= _maxEnemies;
+        }
+
+        public static void DecreaseEnemyCount()
+        {
+            _enemyCount--;
+        }
+
     }
 }

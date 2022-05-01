@@ -7,7 +7,8 @@
             get;
             set;
         }
-        bool TakeDamage();
-        void DoDamage();
+        void TakeDamage();
+
+        bool IsDead();
     }
 }

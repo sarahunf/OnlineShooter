@@ -53,7 +53,12 @@ namespace Photon.Scripts.Managers
         {
             PhotonNetwork.Instantiate(ojbName, position, rotation);
         }
-        
+
+        public void DestroyObject(GameObject go)
+        {
+            Destroy(go);
+        }
+
         public bool AllPlayerJoined()
         {
             return PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == CurrentGameStatics.PLAYER_COUNT;

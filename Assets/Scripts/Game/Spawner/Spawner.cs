@@ -18,7 +18,7 @@ namespace Game.Spawner
             set;
         }
 
-        protected void Spawn()
+        protected virtual void Spawn()
         {
             ConnectPhotonManager.ME.InstantiateObject(ObjToSpawn.name, randomPosition, quaternion.identity);
         }

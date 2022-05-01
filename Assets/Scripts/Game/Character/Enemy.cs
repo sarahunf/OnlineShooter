@@ -1,21 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using DG.Tweening;
+using Photon.Scripts.Managers;
 using UnityEngine;
 
 namespace Game.Character
 {
-    public class Enemy : MonoBehaviour, ICharacter, IHealth
+    public class Enemy : MonoBehaviour, IHealth
     {
         [SerializeField] private float speed;
         [SerializeField] private byte health;
-        private Dictionary<Player, Transform> playersDict = new Dictionary<Player, Transform>();
-        private Player nearestPlayer;
-
-        public float Speed
-        {
-            get => speed;
-            set => speed = value;
-        }
+        private Dictionary<Player.Player, Transform> playersDict = new Dictionary<Player.Player, Transform>();
+        private Player.Player nearestPlayer;
         
         public byte Health
         {
@@ -23,47 +18,39 @@ namespace Game.Character
             set => health = value;
         }
 
+        public void TakeDamage()
+        {
+            health--;
+            if (IsDead())
+            {
+                ConnectPhotonManager.ME.DestroyObject(gameObject);
+                Spawner.SpawnEnemy.DecreaseEnemyCount();
+            }
+        }
+
+        public bool IsDead()
+        {
+            return Health <= 0;
+        }
+
+
         private void Start()
         {
-            var playerInGame = new List<Player>();
-            playerInGame.AddRange(new[] {FindObjectOfType<Player>()});
+            var playerInGame = new List<Player.Player>();
+            playerInGame.AddRange(new[] {FindObjectOfType<Player.Player>()});
             foreach (var player in playerInGame)
             {
                 playersDict.Add(player, player.transform);
             }
+            
+            AnimateOnSpawn();
         }
 
-        public void Update()
+        private void AnimateOnSpawn()
         {
-            var currentPosition = transform.position;
-            var nClosest = playersDict.OrderBy(t => (t.Value.position - currentPosition).sqrMagnitude)
-                .FirstOrDefault();
-            nearestPlayer = nClosest.Key;
-            if (nearestPlayer)
-            {
-                Move(nearestPlayer.transform.position);
-            }
+            transform.localScale = Vector3.zero;
+            transform.DOScale(new Vector3(2,2,1), 3f).SetEase(Ease.OutElastic);
         }
-
-        public void Move(Vector2 translation)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, translation,
-                Speed * Time.deltaTime);
-        }
-
-        public void Shoot()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool TakeDamage()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void DoDamage()
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 }

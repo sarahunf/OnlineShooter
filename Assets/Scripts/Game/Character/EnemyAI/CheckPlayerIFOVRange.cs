@@ -32,7 +32,6 @@ namespace Game.Character.EnemyAI
                     state = NodeState.SUCCESS;
                     return state;
                 }
-
                 state = NodeState.FAILURE;
                 return state;
             }
