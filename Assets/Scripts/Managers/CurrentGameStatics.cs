@@ -2,6 +2,6 @@
 {
     public static class CurrentGameStatics
     {
-        public static byte PLAYER_COUNT = 1;
+        public static byte MAX_PLAYER_COUNT = 1;
     }
 }

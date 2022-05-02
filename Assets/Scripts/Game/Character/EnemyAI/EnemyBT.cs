@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.BehaviorTree;
 using UnityEngine;
 using Tree = Game.BehaviorTree.Tree;
@@ -8,15 +7,18 @@ namespace Game.Character.EnemyAI
 {
     public class EnemyBT : Tree
     {
-        public Transform[] waypoints;
-
-        public static float speed = 3f;
-        public static float fovRange = 9f;
-        public static float attackRange = 2f;
-        
+        [HideInInspector]public Transform[] waypoints;
+        internal static float speed;
+        internal static float fovRange = 25f;
+        internal static float attackRange = 2f;
         internal static readonly string Attacking ="isAttacking";
         internal static readonly string Running = "isRunning";
-        
+
+
+        private void OnEnable()
+        {
+            speed = this.GetComponent<Enemy>().speed;
+        }
 
         //order is crucial. Prioritizes hierarchy of enemy actions
         protected override Node SetupTree()

@@ -9,7 +9,7 @@ namespace Game.Character.EnemyAI
         private Player.Player _playerManager;
         
         private float _attackTime = 1f;
-        private float _attackCounter = 0f;
+        private float _attackCounter;
 
         private Animator _animator;
 
@@ -30,7 +30,7 @@ namespace Game.Character.EnemyAI
             _attackCounter += Time.deltaTime;
             if (_attackCounter >= _attackTime)
             {
-                if (_playerManager.IsDead())
+                if (!_playerManager)
                 {
                     ClearData("target");
                     _animator.SetBool(EnemyBT.Attacking, false);

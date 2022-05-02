@@ -1,19 +1,27 @@
-﻿using System.Collections.Generic;
-using DG.Tweening;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Game.Spawner;
+using Photon.Pun;
 using Photon.Scripts.Managers;
 using ScriptableObjects;
 using UnityEngine;
 
 namespace Game.Character
 {
-    public class Enemy : MonoBehaviour, IHealth
+    public class Enemy : MonoBehaviourPun, IHealth
     {
-        [SerializeField] private CharacterData characterData;
-        [SerializeField] private float speed;
+        public float speed;
         [SerializeField] private byte health;
+        [SerializeField] private Animator animator;
+        [SerializeField] private EnemyData enemyData;
+        [SerializeField] private Collectible.Collectible collectible;
         private Dictionary<Player.Player, Transform> _playersDict = new Dictionary<Player.Player, Transform>();
         private Player.Player _nearestPlayer;
-        private byte startHealth;
+        private byte _startHealth;
+        private byte _score;
+        private static readonly int IsDamaging = Animator.StringToHash("isDamaging");
+
         public byte Health
         {
             get => health;
@@ -22,41 +30,49 @@ namespace Game.Character
 
         private void Start()
         {
-            startHealth = health;
+            _startHealth = health;
+            
             var playerInGame = new List<Player.Player>();
             playerInGame.AddRange(new[] {FindObjectOfType<Player.Player>()});
-            foreach (var player in playerInGame)
+            foreach (var player in playerInGame.Where(player => player))
             {
                 _playersDict.Add(player, player.transform);
             }
             GetData();
-            AnimateOnSpawn();
-        }
-        
-        private void GetData()
-        {
-            speed = characterData.Speed;
-            health = characterData.Health;
+            SetData();
         }
 
-        private void AnimateOnSpawn()
+        private void GetData()
         {
-            transform.localScale = Vector3.zero;
-            transform.DOScale(new Vector3(2,2,1), 3f).SetEase(Ease.OutElastic);
+            speed = enemyData.Speed;
+            health = enemyData.Health;
+            _score = enemyData.score;
+        }
+
+        private void SetData()
+        {
+            collectible.score = _score;
         }
         
-        public void TakeDamage(byte damage)
+        public void TakeDamage(byte damage, Photon.Realtime.Player player)
         {
             health -= damage;
-            if (health > startHealth)
+            StartCoroutine(PlayDamageAnimation());
+            if (health > _startHealth)
             {
                 health = 0;
             }
-            if (IsDead())
-            {
-                ConnectPhotonManager.ME.DestroyObject(gameObject);
-                Spawner.SpawnEnemy.DecreaseEnemyCount();
-            }
+            if (!IsDead()) return;
+            collectible.player = player;
+            ConnectPhotonManager.ME.DestroyObject(gameObject);
+            SpawnEnemy.DecreaseEnemyCount();
+        }
+
+        private IEnumerator PlayDamageAnimation()
+        {
+            animator.SetBool(IsDamaging, true);
+            yield return new WaitForSeconds(0.2f);
+            animator.SetBool(IsDamaging, false);
         }
 
         public bool IsDead()

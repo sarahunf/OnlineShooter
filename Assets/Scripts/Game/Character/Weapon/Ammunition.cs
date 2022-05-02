@@ -7,35 +7,39 @@ namespace Game.Character.Weapon
 {
     public class Ammunition : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        public Rigidbody2D rigidbody2D;
         public AmmunitionData ammunitionData;
-        [SerializeField] private Rigidbody2D rigidbody2D;
-        [SerializeField] private SpriteRenderer spriteRenderer;        
-        [SerializeField] private byte speed;
-        [SerializeField] private byte speedMultiplier;
-        [SerializeField]  private byte damage;
-        [SerializeField]  private byte destroyTime;
-        [SerializeField]  private byte sizeMultiplier;
+        [HideInInspector]public byte damage;
+        private byte _speed;
+        private byte _speedMultiplier;
+        private byte _destroyTime;
+        private byte _sizeMultiplier;
         private static int _enemyLayerMask;
+        private Photon.Realtime.Player _playerWhoShot;
 
         private void OnEnable()
         {
-            GetData();
             _enemyLayerMask = LayerMask.NameToLayer("Enemy");
+
+            GetData();
+            transform.localScale = _sizeMultiplier * transform.localScale;
         }
 
         private void GetData()
         {
-            speed = ammunitionData.Speed;
-            speedMultiplier = ammunitionData.SpeedMultiplier;
+            _speed = ammunitionData.Speed;
+            _speedMultiplier = ammunitionData.SpeedMultiplier;
             damage = ammunitionData.Damage;
             spriteRenderer.color = ammunitionData.Color;
-            destroyTime = ammunitionData.DestroyTime;
-            sizeMultiplier = ammunitionData.SizeMultiplier;
+            _destroyTime = ammunitionData.DestroyTime;
+            _sizeMultiplier = ammunitionData.SizeMultiplier;
         }
 
-        public void Move(Vector2 direction)
+        public void Move(Vector2 direction, Photon.Realtime.Player player)
         {
-            int currentSpeed = speed * speedMultiplier;
+            _playerWhoShot = player;
+            int currentSpeed = _speed * _speedMultiplier;
             rigidbody2D.velocity = direction * currentSpeed * Time.deltaTime;
             StartCoroutine(DestroyUnused());
         }
@@ -43,12 +47,17 @@ namespace Game.Character.Weapon
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.layer != _enemyLayerMask) return;
-            col.GetComponent<Enemy>().TakeDamage(damage);
+            
+            if (col.gameObject.layer == _enemyLayerMask)
+            {
+                col.GetComponent<Enemy>().TakeDamage(damage, _playerWhoShot);
+                ConnectPhotonManager.ME.DestroyObject(gameObject);
+            }
         }
 
         private IEnumerator DestroyUnused()
         {
-            yield return new WaitForSeconds(destroyTime);
+            yield return new WaitForSeconds(_destroyTime);
             ConnectPhotonManager.ME.DestroyObject(gameObject);
         }
     }

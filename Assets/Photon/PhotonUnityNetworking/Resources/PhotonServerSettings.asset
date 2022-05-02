@@ -41,6 +41,16 @@ MonoBehaviour:
   - RespawnSpaceship
   - TakeDamageRPC
   - RPC_Shoot
+  - ChangeWeapon
+  - ReloadWeapon
+  - RPC_ChangeWeapon
+  - RPC_ReloadWeapon
+  - AddScoreRPC
+  - RPCTakeDamage
+  - RPCChangeWeapon
+  - RPCReloadWeapon
+  - RPCShoot
+  - RPCUpdateScore
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

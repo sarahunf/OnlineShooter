@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70bc6b1b5c8e4efbaba005239678d28f, type: 3}
-  m_Name: EnemyCommon
+  m_Script: {fileID: 11500000, guid: 5652c19c3fad45e98fe9407929fc709a, type: 3}
+  m_Name: AmmunitionFast
   m_EditorClassIdentifier: 
-  Speed: 4
-  Health: 1
+  Speed: 254
+  SpeedMultiplier: 10
+  Damage: 1
+  Color: {r: 0, g: 1, b: 0.5516758, a: 1}
+  DestroyTime: 3
+  SizeMultiplier: 1

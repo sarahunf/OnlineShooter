@@ -10,10 +10,10 @@ namespace Game.Spawner
         [SerializeField] private GameObject enemy;
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] protected float startTimeBtwSpawns;
-        private int _maxEnemies;
-        private readonly int _maxEnemiesMultiplier = ConnectPhotonManager.ME.PlayersInRoom();
-        private static int _enemyCount;
         private float _timeBtwSpawns;
+        private int _maxEnemies;
+        private int _maxEnemiesMultiplier;
+        private static int _enemyCount;
         private int _randomIndex;
 
         protected override GameObject ObjToSpawn
@@ -27,18 +27,19 @@ namespace Game.Spawner
 
         private void Start()
         {
-        _randomIndex = Random.Range(0, spawnPoints.Length);
-        _timeBtwSpawns = startTimeBtwSpawns;
-        _maxEnemies = spawnPoints.Length * _maxEnemiesMultiplier;
-        ObjToSpawn.GetComponent<EnemyBT>().waypoints =
-            spawnPoints[_randomIndex].GetComponent<SpawnerWayPoints>().waypoints;
+            _maxEnemiesMultiplier = ConnectPhotonManager.ME.PlayersInRoomCount();
+            _randomIndex = Random.Range(0, spawnPoints.Length);
+            _timeBtwSpawns = startTimeBtwSpawns;
+            _maxEnemies = spawnPoints.Length * _maxEnemiesMultiplier * 50;
+            ObjToSpawn.GetComponent<EnemyBT>().waypoints =
+                spawnPoints[_randomIndex].GetComponent<SpawnerWayPoints>().waypoints;
         }
 
         private void Update()
         {
             if (!ConnectPhotonManager.ME.AllPlayerJoined()) return;
             if (ReachedMaxEnemies()) return;
-            
+
             if (_timeBtwSpawns <= 0)
             {
                 _randomIndex = Random.Range(0, spawnPoints.Length);
@@ -63,6 +64,5 @@ namespace Game.Spawner
         {
             _enemyCount--;
         }
-
     }
 }

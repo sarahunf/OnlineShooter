@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3247375704889407693}
   - component: {fileID: 4611390522741888187}
   - component: {fileID: 7446973399811351584}
-  - component: {fileID: 8825022478646502210}
-  m_Layer: 8
+  - component: {fileID: 6606538039218846951}
+  m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 9
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 0.894326, b: 0.24056602, a: 1}
   m_FlipX: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &8825022478646502210
+--- !u!114 &6606538039218846951
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,14 +172,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6037731426410255576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bece7330d62c4d0e9d9578d4e9a5bdbc, type: 3}
+  m_Script: {fileID: 11500000, guid: a37442e204ed495f9dda3a8c8af2f284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammunitionData: {fileID: 11400000, guid: 9de4dc40735bb8846a0e704644ad402a, type: 2}
-  rigidbody2D: {fileID: 6529514707472396148}
   spriteRenderer: {fileID: 5557094723741522650}
-  speed: 0
-  speedMultiplier: 0
+  rigidbody2D: {fileID: 6529514707472396148}
+  ammunitionData: {fileID: 11400000, guid: 2bd8c725251155d4bb7d5bba214b764a, type: 2}
   damage: 0
-  destroyTime: 0
-  sizeMultiplier: 0
