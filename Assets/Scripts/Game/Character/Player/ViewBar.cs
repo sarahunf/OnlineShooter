@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Game.Character.Player
 {
-    public class HealthBar : MonoBehaviour
+    public class ViewBar : MonoBehaviour
     {
         [SerializeField] private Image fillBar;
         internal float startSize;
@@ -11,6 +11,10 @@ namespace Game.Character.Player
         public void UpdateView(byte amount)
         {
             fillBar.fillAmount = amount/startSize;
+            if (fillBar.fillAmount < 0.05f)
+            {
+                fillBar.fillAmount = 0;
+            }
         }
     }
 }

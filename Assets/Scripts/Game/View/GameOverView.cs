@@ -31,6 +31,7 @@ namespace Game.View
         private void ReturnToMainMenu()
         {
             ScenesManager.ME.LoadScene(ScenesManager.MainMenu);
+            ConnectPhotonManager.ME.LeaveRoom();
         }
     }
 }

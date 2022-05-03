@@ -14,8 +14,8 @@ namespace Game.Character.Player
         [SerializeField] private byte health;
         [SerializeField] private CharacterData characterData;
         [SerializeField] private Animator anim;
-        [SerializeField] private HealthBar healthBar;
         [SerializeField] private TextMeshProUGUI nicknameText;
+        [SerializeField] private ViewBar healthBar;
         private readonly int _isRunning = Animator.StringToHash("isRunning");
         private readonly int _isShooting = Animator.StringToHash("isShooting");
         private GameOverView _gameOverView;

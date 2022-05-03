@@ -52,6 +52,12 @@ namespace Photon.Scripts.Managers
             PhotonNetwork.LoadLevel(ScenesManager.Game);
         }
 
+        public void LeaveRoom()
+        {
+            PhotonNetwork.LeaveRoom();
+        }
+
+
         public void SaveNickName(string nickname)
         {
             PhotonNetwork.NickName = nickname;

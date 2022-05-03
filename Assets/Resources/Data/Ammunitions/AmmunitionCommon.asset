@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AmmunitionCommon
   m_EditorClassIdentifier: 
   Speed: 254
-  SpeedMultiplier: 5
+  SpeedMultiplier: 6
   Damage: 1
   Color: {r: 0.6037736, g: 0, b: 0.015236621, a: 1}
   DestroyTime: 3
